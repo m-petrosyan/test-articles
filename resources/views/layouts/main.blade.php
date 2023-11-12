@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Laravel</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet"/>
+</head>
+<body class="antialiased">
+<div
+    class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
+    @if (Route::has('login'))
+        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+            @auth
+                <a href="{{ url('/') }}"
+                   class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{auth()->user()->name}}</a>
+            @else
+                <a href="{{ route('login') }}"
+                   class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                    in</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}"
+                       class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
+</div>
+
+<section class="max-w-7xl mx-auto mt-10">
+    <nav class="flex gap-4 justify-end">
+        <a href="{{route('homepage')}}"
+           class="{{ request()->routeIs('homepage') ? 'font-bold border-b-4 border-indigo-500' : 'opacity-5' }}">
+            На главную
+        </a>
+        <a href="{{route('article.index')}}"
+           class="{{ request()->routeIs('article.index') ? 'font-bold border-b-4 border-indigo-500' : 'opacity-5' }}">
+            Каталог статей
+        </a>
+    </nav>
+    @yield('content')
+</section>
+</body>
+</html>
