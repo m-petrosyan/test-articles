@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Article\ArticleViewsResource;
 use App\Models\Article;
 use App\Repositories\ArticleRepository;
 use App\Repositories\TagRepository;
 use App\Services\ArticleService;
-use Illuminate\Http\RedirectResponse;
 
 class ArticleController extends Controller
 {
@@ -32,17 +32,6 @@ class ArticleController extends Controller
 
 
     /**
-     * @param  Article  $article
-     * @return RedirectResponse
-     */
-    public function likeToggle(Article $article): RedirectResponse
-    {
-        $article->likes()->toggle(auth()->id());
-
-        return redirect()->back();
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Article $article)
@@ -50,5 +39,10 @@ class ArticleController extends Controller
         $article = $this->articleService->show($article);
 
         return view('article.show', compact('article'));
+    }
+
+    public function addView(Article $article)
+    {
+        return new ArticleViewsResource($this->articleService->updateViews($article));
     }
 }

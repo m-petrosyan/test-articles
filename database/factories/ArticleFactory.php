@@ -21,7 +21,8 @@ class ArticleFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'image' => $this->faker->imageUrl(640, 480),
             'title' => $this->faker->title,
-            'description' => $this->faker->text(500),
+            'description' => $this->faker->realTextBetween(200),
+            'created_at' => $this->faker->dateTime,
         ];
     }
 }

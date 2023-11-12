@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
@@ -18,8 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('homepage');
 
-Route::resource('article', ArticleController::class)->only('index', 'create', 'show');
+Route::resource('articles', ArticleController::class)->only('index', 'create', 'show');
 
-Route::post('/article/liketoggle/{article}', [ArticleController::class, 'likeToggle'])->name('article.liketoggle');
 
-Route::post('comment/{article}', [CommentController::class, 'store'])->name('comment.store');
+Route::middleware('auth:web')->group(function () {
+    Route::post('/articles/liketoggle/{article}', [LikeController::class, 'likeToggle']);
+    Route::post('/articles/add-view/{article}', [ArticleController::class, 'addView']);
+    Route::post('/articles/add-comment/{article}', [CommentController::class, 'store']);
+});

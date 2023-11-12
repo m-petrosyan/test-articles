@@ -14,6 +14,6 @@ class ArticleRepository implements ArticleInterface
 
     public static function getWithRelations(object $article)
     {
-        return $article->load(['tags', 'comments.user']);
+        return $article->load(['tags', 'comments.user'])->loadCount('likes');
     }
 }

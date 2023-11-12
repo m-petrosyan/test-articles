@@ -7,11 +7,10 @@ class CommentService
     /**
      * @param  object  $article
      * @param  array  $attributes
-     * @return void
+     * @return object
      */
-    public function store(object $article, array $attributes): void
+    public function store(object $article, array $attributes): object
     {
-//        dd($attributes + ['user_id' => auth()->id()]);
-        $article->comments()->create($attributes + ['user_id' => auth()->id()]);
+        return $article->comments()->create($attributes + ['user_id' => auth()->id()]);
     }
 }

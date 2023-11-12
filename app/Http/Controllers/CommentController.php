@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentCreateRequest;
+use App\Http\Resources\Comment\CommentResource;
 use App\Models\Article;
 use App\Services\CommentService;
 
@@ -20,9 +21,8 @@ class CommentController extends Controller
      */
     public function store(CommentCreateRequest $request, Article $article)
     {
-        $this->commentService->store($article, $request->validated());
+        $comments = $this->commentService->store($article, $request->validated());
 
-        return redirect()->back();
+        return new CommentResource($comments);
     }
-
 }

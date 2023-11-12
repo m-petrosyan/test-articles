@@ -6,8 +6,15 @@ use App\Repositories\ArticleRepository;
 
 class ArticleService
 {
-    public function store()
+    /**
+     * @param  object  $article
+     * @return object
+     */
+    public function updateViews(object $article): object
     {
+        $article->increment('views');
+
+        return $article;
     }
 
     /**
@@ -16,8 +23,6 @@ class ArticleService
      */
     public function show(object $article): object
     {
-        $article->increment('views');
-
         return ArticleRepository::getWithRelations($article);
     }
 }
