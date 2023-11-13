@@ -15,7 +15,7 @@
                         @foreach($articles as $article)
                             <div
                                 class="flex gap-5 flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                <a href="{{route('articles.show',$article->id)}}">
+                                <a href="{{route('articles.show', $article->slug)}}">
                                     <div style="background-image: url({{$article->image}})"
                                          class="h-64 w-full bg-no-repeat bg-cover">
                                     </div>

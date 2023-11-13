@@ -17,11 +17,13 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->unique()->sentence(3);
         return [
             'user_id' => User::inRandomOrder()->first()->id,
             'image' => $this->faker->imageUrl(640, 480),
-            'title' => $this->faker->title,
-            'description' => $this->faker->realTextBetween(200),
+            'title' => $title,
+            'slug' => str($title)->slug(),
+            'description' => $this->faker->text(200),
             'created_at' => $this->faker->dateTime,
         ];
     }

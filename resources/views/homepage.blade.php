@@ -6,7 +6,7 @@
                 @foreach($articles as $article)
                     <div
                         class="flex max-w-sm flex-col  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{route('articles.show',$article->id)}}">
+                        <a href="{{route('articles.show', $article->slug)}}">
                             <img class="rounded-t-lg" src="{{$article->image}}" alt=""/>
                         </a>
                         <div class="p-5 h-full flex flex-col justify-between">

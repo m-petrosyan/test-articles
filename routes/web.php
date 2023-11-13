@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('homepage');
-
-Route::resource('articles', ArticleController::class)->only('index', 'create', 'show');
+Route::get('articles/{article:slug}', [ArticleController::class,'show'])->name('articles.show');
+Route::get('articles', [ArticleController::class,'index'])->name('articles.index');
 
 
 Route::middleware('auth:web')->group(function () {

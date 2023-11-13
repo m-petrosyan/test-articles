@@ -48,4 +48,9 @@ class Article extends Model
     {
         return $this->belongsToMany(User::class, 'article_like');
     }
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = str($value)->slug();
+    }
 }
